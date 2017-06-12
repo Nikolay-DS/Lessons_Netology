@@ -1,0 +1,4 @@
+{
+    "пельмени": [{"ingridient_name": "Мука", "quantity": 200, "measure": "гр"}, {"ingridient_name": "Яйца", "quantity": 1, "measure": "шт"}, {"ingridient_name": "Фарш", "quantity": 400, "measure": "гр"}, {"ingridient_name": "Вода", "quantity": 200, "measure": "гр"}],
+    "салат": [{"ingridient_name": "Помидоры", "quantity": 200, "measure": "гр"}, {"ingridient_name": "Огурцы", "quantity": 200, "measure": "гр"}, {"ingridient_name": "Лук", "quantity": 10, "measure": "гр"}, {"ingridient_name": "Масло", "quantity": 50, "measure": "мл"}],
+    "пицца": [{"ingridient_name": "Мука", "quantity": 100, "measure": "гр"}, {"ingridient_name": "Яйца", "quantity": 1, "measure": "шт"}, {"ingridient_name": "Помидоры", "quantity": 100, "measure": "гр"}, {"ingridient_name": "Масло", "quantity": 50, "measure": "мл"}, {"ingridient_name": "Сыр", "quantity": 100, "measure": "гр"}]}
