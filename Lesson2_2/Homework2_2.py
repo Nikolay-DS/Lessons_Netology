@@ -1,6 +1,6 @@
 def create_menu_from_file():
 	import json
-	with open('/Users/nicolas13/Desktop/Lesson2_1/Lesson2_2.json') as f:
+	with open('/Users/nicolas13/Lessons_Netology/Lesson2_2/Lesson2_2.json') as f:
 		cook_book = json.load(f)
 		return cook_book
 
