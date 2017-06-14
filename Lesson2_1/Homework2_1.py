@@ -1,23 +1,19 @@
 def create_menu_from_file():
-	with open('/Users/nicolas13/Desktop/Lesson2_1/Lesson2_1.txt', 'r') as f:
-		ingrid_string_dict = []
+	with open('Lesson2_1.txt', 'r') as f:
+		ingrid_string_list = []
 		ingrid_string = []
 		cook_book = {}
 		for line in f:
-			dish  = line.strip() 
-			quantity_of_ingrid = f.readline().strip()	
+			dish = line.strip() 
+			quantity_of_ingrid = f.readline().strip()
 			ingrid_from_file = f.readline()
-			ingrid = ''
-			final_ingrid_per_dish = []
-			while ingrid_from_file.strip() != '':
-				ingrid += ingrid_from_file.rstrip()
+			while ingrid_from_file.strip():
+				ingrid = ingrid_from_file.rstrip()
 				ingrid_string = ingrid.split(' | ')
-				ingrid_string_dict = [{'ingridient_name' : ingrid_string[0], 'quantity' : int(ingrid_string[1]), 'measure' : ingrid_string[2]}]
-				final_ingrid_per_dish += ingrid_string_dict
-				cook_book[dish] = final_ingrid_per_dish
+				ingrid_string_list.append({'ingridient_name' : ingrid_string[0],\
+				 'quantity' : int(ingrid_string[1]), 'measure' : ingrid_string[2]})
+				cook_book[dish] = ingrid_string_list
 				ingrid_from_file = f.readline()
-				ingrid = ''
-#		print(str(cook_book).replace('\'','"'))
 		return cook_book
 
 
