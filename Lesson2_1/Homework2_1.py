@@ -1,9 +1,11 @@
 def create_menu_from_file():
 	with open('Lesson2_1.txt', 'r') as f:
-		ingrid_string_list = []
-		ingrid_string = []
+#		ingrid_string_list = []
+#		ingrid_string = []
 		cook_book = {}
 		for line in f:
+			ingrid_string_list = []
+			ingrid_string = []
 			dish = line.strip() 
 			quantity_of_ingrid = f.readline().strip()
 			ingrid_from_file = f.readline()
