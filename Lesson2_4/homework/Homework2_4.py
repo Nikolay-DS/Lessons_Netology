@@ -48,26 +48,26 @@ migrations = 'Migrations'
 
 files = glob.glob(os.path.join(migrations, "*.sql"))
 for file in files:
-	print('Migrations   ', file)
+    print('Migrations   ', file)
 
 def first_user_request():
-	file_copy = []
-	file_copy = files
-	while True:
-		request = input('Введите строку: ')
-		counter = 0
-		file_request = []
-		for file in file_copy:
-			contents = open(file).read()
-			if request in contents.rstrip():
-				counter += 1
-				file_request.append(file)
-				print(counter, file)
-			else:
-				continue
-		for file_name in file_request:
-			print(file_name)
-		print("Всего: ", counter)
-		file_copy = file_request
-		
+    file_copy = []
+    file_copy = files
+    while True:
+        request = input('Введите строку: ')
+        counter = 0
+        file_request = []
+        for file in file_copy:
+            contents = open(file).read()
+            if request in contents.rstrip():
+                counter += 1
+                file_request.append(file)
+                print(counter, file)
+            else:
+                continue
+        for file_name in file_request:
+            print(file_name)
+        print("Всего: ", counter)
+        file_copy = file_request
+        
 first_user_request()
