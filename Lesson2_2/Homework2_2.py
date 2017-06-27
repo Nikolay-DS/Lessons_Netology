@@ -1,5 +1,7 @@
+import json
+
+
 def create_menu_from_file():
-	import json
 	with open('/Users/nicolas13/Lessons_Netology/Lesson2_2/Lesson2_2.json') as f:
 		cook_book = json.load(f)
 		return cook_book
@@ -23,6 +25,7 @@ def get_shop_list_by_dishes(dishes, person_count):
 def print_shop_list(shop_list):
     for shop_list_item in shop_list.values():
 	    print('{ingridient_name} {quantity} {measure}'.format(**shop_list_item))
+
 
 def create_shop_list():
     person_count = int(input('введите количество человек: '))
