@@ -31,7 +31,6 @@ def read_and_write_translation():
     for file in files:
         with open(file, 'r') as f:
             text = f.read()
-            text = text.encode('utf8')
             resp = get_translation(text, lang_input='ru') # можно lang_input = input('Insert the translation\'s lang: ')
             with open('{}-translate.txt'.format(file.replace(".txt", "")), 'w') as f:
                 res_dict = resp.json()
