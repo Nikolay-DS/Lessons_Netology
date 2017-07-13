@@ -44,30 +44,30 @@
 import glob
 import os.path
 
-migrations = 'Migrations'
 
-files = glob.glob(os.path.join(migrations, "*.sql"))
-for file in files:
-    print('Migrations   ', file)
+def files_list():
+    migrations = input('Укажите путь к директории с файлами: ')
+    files = glob.glob(os.path.join(migrations, "*.sql"))
+    for file in files:
+        print('Migrations   ', file)
+    return files
 
 def first_user_request():
-    file_copy = []
-    file_copy = files
+    file_copy = files_list()
     while True:
         request = input('Введите строку: ')
-        counter = 0
-        file_request = []
+        files_request = []
         for file in file_copy:
             contents = open(file).read()
-            if request in contents.rstrip():
-                counter += 1
-                file_request.append(file)
-                print(counter, file)
-            else:
-                continue
-        for file_name in file_request:
+            with open(file) as f:
+                contents = f.read()
+                if request in contents.rstrip():
+                    files_request.append(file)
+                    print(len(files_request), file)
+                    f.close()
+        for file_name in files_request:
             print(file_name)
-        print("Всего: ", counter)
-        file_copy = file_request
+        print("Всего: ", len(files_request))
+        file_copy = files_request
         
 first_user_request()
