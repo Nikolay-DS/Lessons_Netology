@@ -3,65 +3,58 @@ import json
 
 
 def file_encoding():
-    with open('newsafr.json', 'rb') as f:
+    filename = input('Введите название файла: ')
+    with open('{}'.format(filename), 'rb') as f:
         data = f.read()
         result = chardet.detect(data)
         print(result)
         s = data.decode(result['encoding'])
-
     json_acceptable_string = s.replace("'", "")
     travel_dict = json.loads(json_acceptable_string)
     working_dict = travel_dict['rss']['channel']['item']
     return working_dict
 
 
-def create_dict_from_file():
+def create_dict_from_file(working_dict):
     new_dict = {}
     new_list = []
-    for words in file_encoding():
+    for words in working_dict:
         new_dict['title'] = words['title']
         new_dict['description'] = words['description']
         new_list += new_dict.values()
     separated_words = str(new_list).split()
-    final_word = []
+    get_cleaned_words = []
     for word in separated_words:
         if len(word.replace(',', '').replace('/', '').replace(':', '').replace('{\'__cdata', '').replace('\'',
                                                                                                          '')) >= 6:
-            final_word.append(word)
+            get_cleaned_words.append(word)
         else:
             continue
-    final_word = sorted(final_word, key=len, reverse=True)
-    return final_word
+    get_cleaned_words = sorted(get_cleaned_words, key=len, reverse=True)
+    return get_cleaned_words
 
 
-dct = {}
-
-
-def analysis():
-    for i in create_dict_from_file():
+def analysis(get_cleaned_words):
+    dct = {}
+    for i in get_cleaned_words:
         if i in dct:
             dct[i] += 1
         else:
             dct[i] = 1
-    return dct
+    return sorted(dct.items(), key=lambda x: x[1], reverse=True)[:10]
+    
 
-
-def invert_dict_non_unique(d):
-    newdict = {}
-    for k, v in iter(d.items()):
-        newdict.setdefault(v, []).append(k)
-    return newdict
-
-
-def top_ten():
+def print_top10_frequencies(word_frequencies):
     t = 1
     print('\n ТОП 10 СЛОВ: \n')
-    for i in sorted(invert_dict_non_unique(analysis()), reverse=True):
-        if t <= 10:
-            t = 1 + t
-            print("'{}':{}".format(i, invert_dict_non_unique(dct)[i]))
-        else:
-            break
+    print(word_frequencies)
 
 
-top_ten()
+def main():
+    working_dict = file_encoding()
+    get_cleaned_words = create_dict_from_file(working_dict)
+    word_frequencies = analysis(get_cleaned_words)
+    print_top10_frequencies(word_frequencies)
+
+main()
+    
