@@ -7,7 +7,7 @@ import json
 
 VERSION = '5.65'
 USER_ID = ''
-token = '72d3ab585819d853c73eed0e409d8fa931220ef4144385282817842420b16cdbc46398a6e98522fef77f6'
+token = ''
 
 
 def my_friends(VERSION):
