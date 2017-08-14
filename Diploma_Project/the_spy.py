@@ -9,7 +9,7 @@ from termcolor import colored
 
 
 VERSION = '5.65'
-USER_ID = ''  # input('Введите ID пользователя: ')
+USER_ID = input('Введите ID пользователя: ')
 TOKEN = ''  # TOKEN
 pprint(get_friends(USER_ID, TOKEN))
 
@@ -31,4 +31,5 @@ def write_to_file(user_id, version, token):
     print(colored('groups.json successfully created', 'green'))
 
 
-write_to_file(USER_ID, VERSION, TOKEN)
+if __name__ == '__main__':
+    write_to_file(USER_ID, VERSION, TOKEN)
