@@ -9,8 +9,8 @@ from termcolor import colored
 
 
 VERSION = '5.65'
-USER_ID = 5030613  # input('Введите ID пользователя: ')
-TOKEN = '5dfd6b0dee902310df772082421968f4c06443abecbc082a8440cb18910a56daca73ac8d04b25154a1128'  # TOKEN
+USER_ID = input('Введите ID пользователя: ')
+TOKEN = ''  # TOKEN
 pprint(get_friends(USER_ID, TOKEN))
 
 
