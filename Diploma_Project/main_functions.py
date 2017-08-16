@@ -3,22 +3,22 @@ import time
 from termcolor import colored
 
 API = 'https://api.vk.com/method/'
+TOO_MANY_REQUEST = 6
 
 
-def do_request(response):
+def do_request(url, params):
     while True:
+        response = requests.get(url, params)
         print(colored('status code is [{}]'.format(response.status_code), 'yellow'))
         json_resp = response.json()
         if 'response' in json_resp:
             print(colored('done', 'green'))
             return json_resp
-        elif json_resp['error']['error_code'] == 6:
+        elif json_resp['error']['error_code'] == TOO_MANY_REQUEST:
             print(colored(json_resp['error']['error_msg'], 'red'))
             print(colored('Please, waiting for 1 second', 'yellow'))
             time.sleep(1)
             print(colored('Retrying...', 'blue'))
-            session = requests.Session()
-            response = session.send(response.request)
             continue
         else:
             print(colored(json_resp['error']['error_msg'], 'red'))
@@ -32,7 +32,7 @@ def get_friends(user_id, version):
         'extended': 1,
         'fields': 'bdate'
     }
-    response = do_request(requests.get(API + 'friends.get', params))
+    response = do_request(API + 'friends.get', params)
     return response
     
 
@@ -44,7 +44,7 @@ def get_groups(user_id, version, token):
         'extended': 1,
         'fields': 'members_count',
     }
-    response = do_request(requests.get(API + 'groups.get', params))
+    response = do_request(API + 'groups.get', params)
     return response
 
 
@@ -75,8 +75,8 @@ def get_friends_groups(user_id, version, token):
     friends_id = get_friends_id_list(user_id, token)
     group_friends_final = []
     for i, friend_id in enumerate(friends_id):
-        print('...{} %...'.format(round((i+1)*100/len(friends_id), 2)),
-              '№{} friend id {}'.format((i+1), friend_id))
+        print('...{} %...'.format(round((i + 1) * 100 / len(friends_id), 2)),
+              '№{} friend id {}'.format((i + 1), friend_id))
         try:
             group_friends = get_groups(friend_id, version, token)['response']['items']
             print('{} groups for user id {}'.format(len(group_friends), friend_id))
@@ -84,7 +84,7 @@ def get_friends_groups(user_id, version, token):
         except Exception as e:
             print('------------------------------------------------------------------------------')
         for v in group_friends:
-            if 'deactivated' not in v.keys():
+            if 'deactivated' not in v:
                 group_friends_final.append(v['id'])
     friends_group_list = [x for x in group_friends_final]
     return set(sorted(friends_group_list))
