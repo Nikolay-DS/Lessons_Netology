@@ -18,7 +18,7 @@ def auth_data_check(APP_ID, VERSION):
 
 
 auth_data_check(APP_ID, VERSION)
-token = ''  # из-за открытого доступа токен удален
+token = 'd13e692be69592b09fd22c77a590dd34e186e6d696daa88d6d981e1b4e296b14acb377e82dcbc81dc0f22'
 
 
 def my_friends_response(token, VERSION):

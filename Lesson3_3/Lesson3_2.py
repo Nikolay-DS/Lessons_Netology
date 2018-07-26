@@ -29,7 +29,7 @@ key=<API-ключ>
 def read_and_write_translation():
     files = glob.glob(os.path.join('*.txt'))
     for file in files:
-        with open(file, 'r') as f:
+        with open(file, encoding='utf-8') as f:
             text = f.read()
             resp = get_translation(text, lang_input='ru') # можно lang_input = input('Insert the translation\'s lang: ')
             with open('{}-translate.txt'.format(file.replace(".txt", "")), 'w') as f:
